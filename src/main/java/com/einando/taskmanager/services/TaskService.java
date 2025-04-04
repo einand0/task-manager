@@ -1,6 +1,7 @@
 package com.einando.taskmanager.services;
 
 import com.einando.taskmanager.dto.TaskCreateDTO;
+import com.einando.taskmanager.dto.TaskUpdateDTO;
 import com.einando.taskmanager.entities.Task;
 import com.einando.taskmanager.entities.User;
 import com.einando.taskmanager.repositories.TaskRepository;
@@ -33,5 +34,16 @@ public class TaskService {
 
     public void deleteTaskById(Long id){
         taskRepository.deleteById(id);
+    }
+
+    public Task updateTask(Long id, TaskUpdateDTO dto){
+        Task foundedTask = taskRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Tarefa não encontrada!"));
+
+        foundedTask.setTitle(dto.getTitle());
+        foundedTask.setTitle(dto.getDescription());
+        foundedTask.setCompleted(dto.isCompleted());
+
+        return taskRepository.save(foundedTask);
     }
 }

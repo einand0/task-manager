@@ -2,6 +2,7 @@ package com.einando.taskmanager.controllers;
 
 import com.einando.taskmanager.dto.TaskCreateDTO;
 import com.einando.taskmanager.dto.TaskResponseDTO;
+import com.einando.taskmanager.dto.TaskUpdateDTO;
 import com.einando.taskmanager.entities.Task;
 import com.einando.taskmanager.security.UserDetailsImpl;
 import com.einando.taskmanager.services.TaskService;
@@ -51,5 +52,16 @@ public class TaskController {
 
         taskService.deleteTaskById(id);
         return ResponseEntity.ok("Tarefa deletada.");
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody TaskUpdateDTO dto){
+        Task foundedTask = taskService.findTaskById(id);
+        if (!foundedTask.getUser().getId().equals(userDetails.getUser().getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você não tem permissão para executar esta ação.");
+        }
+
+        taskService.updateTask(id, dto);
+        return ResponseEntity.ok().body(new TaskResponseDTO(foundedTask));
     }
 }
