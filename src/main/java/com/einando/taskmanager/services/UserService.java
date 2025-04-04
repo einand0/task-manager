@@ -13,9 +13,7 @@ public class UserService {
     @Autowired
     public UserRepository userRepository;
 
-    public UserResponseDTO createUser(UserCreateDTO dto){
-        User newUser = new User(dto);
-        userRepository.save(newUser);
-        return new UserResponseDTO(newUser);
+    public User createUser(UserCreateDTO dto){
+        return userRepository.save(new User(dto));
     }
 }
