@@ -27,6 +27,10 @@ public class TaskService {
         return taskRepository.findByUser(user);
     }
 
+    public List<Task> getAllTasks(){
+        return taskRepository.findAll();
+    }
+
     public Task findTaskById(Long id) {
         return taskRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Tarefa não encontrada!"));

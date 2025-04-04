@@ -4,9 +4,11 @@ import com.einando.taskmanager.dto.TaskCreateDTO;
 import com.einando.taskmanager.dto.TaskResponseDTO;
 import com.einando.taskmanager.dto.TaskUpdateDTO;
 import com.einando.taskmanager.entities.Task;
+import com.einando.taskmanager.entities.User;
 import com.einando.taskmanager.security.UserDetailsImpl;
 import com.einando.taskmanager.services.TaskService;
 
+import com.einando.taskmanager.utils.UserRole;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.nio.file.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
 import java.util.List;
 
 @RestController
@@ -41,6 +43,18 @@ public class TaskController {
     public ResponseEntity<List<Task>> getUserTasks(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl){
         List<Task> tasks = taskService.getTasksByUser(userDetailsImpl.getUser());
         return ResponseEntity.status(HttpStatus.FOUND).body(tasks);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllTasks(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl){
+        User user = userDetailsImpl.getUser();
+
+        if(user.getRoles().contains(UserRole.ADMIN)){
+            List<Task> tasks = taskService.getAllTasks();
+            return ResponseEntity.status((HttpStatus.FOUND)).body(tasks);
+        } else{
+            throw new AccessDeniedException("Apenas administradores podem acessar todas as tarefas.");
+        }
     }
 
     @DeleteMapping("/{id}")
