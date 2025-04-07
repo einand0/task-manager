@@ -1,11 +1,17 @@
 package com.einando.taskmanager.dto;
 
 import com.einando.taskmanager.entities.User;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(name = "TaskCreateDTO", description = "Objeto para criação de tarefas")
 public class TaskCreateDTO {
+    @Schema(description = "Título da tarefa", example = "Estudar Spring Boot")
     private String title;
+    @Schema(description = "Descrição detalhada da tarefa", example = "Assistir aula e implementar exemplo de JWT")
     private String description;
+    @Schema(description = "Status da tarefa", example = "false")
     private boolean completed;
+    @Schema(hidden = true)
     private User user;
 
     public TaskCreateDTO(){

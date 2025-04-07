@@ -1,12 +1,20 @@
 package com.einando.taskmanager.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name = "TaskUpdateDTO", description = "Objeto para atualizar os dados de uma tarefa")
 public class TaskUpdateDTO {
+
+    @Schema(description = "Novo título da tarefa", example = "Atualizar projeto com Swagger")
     private String title;
+
+    @Schema(description = "Nova descrição da tarefa", example = "Adicionar documentação aos endpoints")
     private String description;
+
+    @Schema(description = "Novo status da tarefa", example = "true")
     private boolean completed;
 
-    public TaskUpdateDTO(){
-
+    public TaskUpdateDTO() {
     }
 
     public TaskUpdateDTO(String title, String description, boolean completed) {

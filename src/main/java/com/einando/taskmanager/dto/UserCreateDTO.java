@@ -1,22 +1,27 @@
 package com.einando.taskmanager.dto;
 
 import com.einando.taskmanager.utils.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+@Schema(name = "UserCreateDTO", description = "Objeto para criação de novo usuário")
 public class UserCreateDTO {
+
+    @Schema(description = "Nome de usuário (login)", example = "einand0")
     private String username;
+
+    @Schema(description = "Email do usuário", example = "einando@example.com")
     private String email;
+
+    @Schema(description = "Senha do usuário", example = "senhaSegura123")
     private String password;
+
+    @Schema(description = "Papéis atribuídos ao usuário", example = "[\"USER\"]")
     private Set<UserRole> roles = new HashSet<>();
 
-    public UserCreateDTO(){}
+    public UserCreateDTO() {}
 
     public UserCreateDTO(String username, String email, String password, Set<UserRole> roles) {
         this.username = username;
