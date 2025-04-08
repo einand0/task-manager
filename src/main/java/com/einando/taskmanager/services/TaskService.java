@@ -45,7 +45,7 @@ public class TaskService {
                 .orElseThrow(() -> new NoSuchElementException("Tarefa não encontrada!"));
 
         foundedTask.setTitle(dto.getTitle());
-        foundedTask.setTitle(dto.getDescription());
+        foundedTask.setDescription(dto.getDescription());
         foundedTask.setCompleted(dto.isCompleted());
 
         return taskRepository.save(foundedTask);
