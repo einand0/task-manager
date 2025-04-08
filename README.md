@@ -62,3 +62,8 @@ git clone https://github.com/seu-usuario/taskmanager.git
 ``` bash
 http://localhost:8080/swagger-ui.html
 ```
+
+## 👨‍💻 Autor
+
+Desenvolvido por [Fernando](https://www.linkedin.com/in/fernandolopess/)  
+Estudante de Sistemas de Informação | Foco em desenvolvimento Java e Spring Boot
