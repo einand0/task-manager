@@ -1,6 +1,6 @@
-#📝 Task Manager API
+# 📝 Task Manager API
 
-##Este é um projeto de API RESTful desenvolvida com Spring Boot para gerenciamento de tarefas. A aplicação permite que usuários criem, leiam, atualizem e excluam tarefas de forma simples e segura.
+## Este é um projeto de API RESTful desenvolvida com Spring Boot para gerenciamento de tarefas. A aplicação permite que usuários criem, leiam, atualizem e excluam tarefas de forma simples e segura.
 
 ⚙️ Funcionalidades principais
 🔐 Autenticação e autorização com JWT
